@@ -4,6 +4,10 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
 # Valid measures list
 VALID_MEASURES = {
     "Violent crime rate",
