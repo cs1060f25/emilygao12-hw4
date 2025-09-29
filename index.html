@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>County Data Playground</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #111; color: #eee; }
+    h1 { color: #4fc3f7; }
+    label { display: block; margin-top: 1rem; }
+    input, select { padding: 0.5rem; margin-top: 0.3rem; width: 300px; }
+    button { margin-top: 1rem; padding: 0.7rem 1.5rem; background: #4fc3f7; border: none; color: #111; font-weight: bold; cursor: pointer; }
+    pre { background: #222; padding: 1rem; margin-top: 1rem; white-space: pre-wrap; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>County Data Playground</h1>
+
+  <label>
+    ZIP (5 digits):
+    <input id="zip" type="text" value="02138" />
+  </label>
+
+  <label>
+    Measure:
+    <select id="measure">
+      <option>Violent crime rate</option>
+      <option>Unemployment</option>
+      <option>Children in poverty</option>
+      <option>Diabetic screening</option>
+      <option>Mammography screening</option>
+      <option>Preventable hospital stays</option>
+      <option>Uninsured</option>
+      <option>Sexually transmitted infections</option>
+      <option>Physical inactivity</option>
+      <option>Adult obesity</option>
+      <option>Premature Death</option>
+      <option selected>Daily fine particulate matter</option>
+    </select>
+  </label>
+
+  <button onclick="sendRequest()">Send Request</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    async function sendRequest() {
+      const zip = document.getElementById("zip").value;
+      const measure = document.getElementById("measure").value;
+      const response = await fetch("/api/county_data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ zip, measure_name: measure })
+      });
+      const data = await response.json();
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
