@@ -1,3 +1,5 @@
+# Code written in conjunction with GenAI (ChatGPT)
+
 from fastapi import FastAPI, HTTPException
 import sqlite3
 from pydantic import BaseModel

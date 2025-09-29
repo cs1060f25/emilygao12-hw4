@@ -1,3 +1,5 @@
+# Code written in conjunction with GenAI (ChatGPT)
+
 #!/usr/bin/env python3
 import sys
 import sqlite3
